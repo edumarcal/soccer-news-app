@@ -38,9 +38,9 @@ public class NewsFragment extends Fragment {
     }
 
     private void observeNews() {
-        newsViewModel.getNews().observe(getViewLifecycleOwner(), news -> {
-            binding.rvNews.setAdapter(new NewsAdapter(news, newsViewModel::saveNews));
-        });
+        newsViewModel.getNews().observe(getViewLifecycleOwner(), news ->
+            binding.rvNews.setAdapter(new NewsAdapter(news, newsViewModel::saveNews))
+        );
     }
 
     private void observeStates() {
