@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import me.dio.soccernews.data.SoccerNewsRepository;
 import me.dio.soccernews.domain.News;
@@ -18,7 +19,7 @@ import retrofit2.Response;
 public class NewsViewModel extends ViewModel {
 
     public enum State {
-        DOING, DONE, ERROR;
+        DOING, DONE, ERROR
     }
 
     private final MutableLiveData<List<News>> news = new MutableLiveData<>();
@@ -42,9 +43,8 @@ public class NewsViewModel extends ViewModel {
             }
 
             @Override
-            public void onFailure(@NonNull Call<List<News>> call, Throwable error) {
-                //FIXME Tirar o printStackTrace quando formos para produção!
-                error.printStackTrace();
+            public void onFailure(@NonNull Call<List<News>> call, @NonNull Throwable error) {
+                Logger.getLogger(this.getClass().getName()).info(error.getMessage());
                 state.setValue(State.ERROR);
             }
         });
